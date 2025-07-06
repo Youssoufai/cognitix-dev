@@ -5,9 +5,9 @@ import Image from 'next/image';
 
 const projects = [
     {
-        title: 'Agronet Marketplace',
+        title: 'Agronet',
         desc: 'A digital marketplace connecting farmers directly to companies that need raw materials — streamlining the agricultural supply chain across Africa.',
-        image: '/images/project-agronet.png',
+        image: '/images/agronet.png',
         link: '/projects/agronet',
         status: 'In Development',
     },
