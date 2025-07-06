@@ -1,1 +1,19 @@
 @import "tailwindcss";
+
+
+@theme {
+  --color-*: initial;
+  /* Reset all default colors */
+
+  --color-white: #ffffff;
+  --color-background: #0b0e1c;
+  --color-indigo: #4f46e5;
+  --color-gold: #eab308;
+  --color-gray-light: #e5e7eb;
+  --color-gray-dark: #1f2937;
+  --color-green: #16a34a;
+  --color-yellow-600: #ca8a04;
+  --color-blue-600: #2563eb;
+  --color-gray-600: #4b5563;
+  --color-neutral-700: #374151;
+}
