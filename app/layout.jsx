@@ -1,6 +1,7 @@
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
 import "./globals.css";
+import { Analytics } from '@vercel/analytics/next';
 
 export const metadata = {
   title: "Cognitix Development",
@@ -19,6 +20,7 @@ export default function RootLayout({ children }) {
         <Navbar />
         {children}
         <Footer />
+        <Analytics />
       </body>
     </html>
   );
