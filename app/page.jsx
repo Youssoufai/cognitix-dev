@@ -1,3 +1,4 @@
+import { Analytics } from "@vercel/analytics/next";
 import CtaSection from "./components/CTA";
 import Hero from "./components/Hero";
 import Mission from "./components/Mission";
@@ -18,6 +19,7 @@ export default function Home() {
       <CtaSection />
       <TeamSection />
       <TestimonialsSection />
+      <Analytics/>
     </>
   );
 }
