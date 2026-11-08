@@ -1,118 +1,153 @@
 'use client';
 
-import Link from 'next/link';
 import Image from 'next/image';
+import { motion } from 'framer-motion';
+import { Sprout, Fingerprint, HeartPulse, ShieldCheck, GraduationCap, Bike, Scissors } from 'lucide-react';
+import SectionHeading from './ui/SectionHeading';
+import RetroWindow from './ui/RetroWindow';
 
 const projects = [
     {
         title: 'Agronet',
         desc: 'A digital marketplace connecting farmers directly to companies that need raw materials — streamlining the agricultural supply chain across Africa.',
         image: '/images/agronet.png',
-        link: '/projects/agronet',
+        icon: Sprout,
         status: 'In Development',
+        hue: 'from-[#14532d] to-[#365314]',
     },
+    /*
     {
         title: 'CivID – Digital ID System',
         desc: 'A biometric-backed identity platform for African governments, enabling real-time verification, public access portals, and developer APIs.',
-        image: '/images/project-civid.png',
-        link: '/projects/civid',
+        icon: Fingerprint,
         status: 'Private Beta',
+        hue: 'from-[#1e1b4b] to-[#1e3a8a]',
     },
+    */
+    /*
     {
         title: 'HealthCloud',
         desc: 'A unified health records and e-consultation platform for clinics, labs, pharmacies, and hospitals — powering digital healthcare systems.',
-        image: '/images/project-healthcloud.png',
-        link: '/projects/healthcloud',
+        icon: HeartPulse,
         status: 'Live',
+        hue: 'from-[#4c0519] to-[#831843]',
     },
+    */
+    /*
     {
         title: 'KyCheck – KYC-as-a-Service',
         desc: 'A plug-and-play KYC API + dashboard for African fintechs and platforms. Supports NIN, BVN, ID match, facial recognition, and real-time checks.',
-        image: '/images/project-kycheck.png',
-        link: '/projects/kycheck',
+        icon: ShieldCheck,
         status: 'In Development',
+        hue: 'from-[#083344] to-[#155e75]',
     },
+    */
     {
-        title: 'EduOS – School Operating System',
-        desc: 'A simple platform for African private and public schools — handling grades, fees, SMS updates, learning support, and finance all in one.',
-        image: '/images/project-eduos.png',
-        link: '/projects/eduos',
+        title: 'SKUL – Campus Operating System',
+        desc: 'A platform for higher institutions — lecturers open a class in seconds, students check in from their own devices, and courses, timetables, and attendance records stay in one place.',
+        image: '/images/skul.png',
+        icon: GraduationCap,
+        link: 'https://getskul-theta.vercel.app/',
         status: 'In Development',
+        hue: 'from-[#3b0764] to-[#6b21a8]',
     },
+    /*
     {
         title: 'RiderX – White-Label Delivery Stack',
         desc: 'A logistics and delivery OS for local rider fleets and vendors — with rider tracking, route assignment, customer SMS/WhatsApp updates, and payments.',
-        image: '/images/project-riderx.png',
-        link: '/projects/riderx',
+        icon: Bike,
         status: 'Prototype',
+        hue: 'from-[#431407] to-[#9a3412]',
     },
+    */
+    /*
     {
         title: 'HustleKit – Micro SaaS Toolkit',
         desc: 'A digital toolkit for tailors, barbers, and caterers — with mini websites, WhatsApp CRM, and payment links to grow their hustle online.',
-        image: '/images/project-hustlekit.png',
-        link: '/projects/hustlekit',
+        icon: Scissors,
         status: 'Coming Soon',
+        hue: 'from-[#422006] to-[#a16207]',
     },
+    */
 ];
+
+const STATUS = {
+    Live: 'bg-green',
+    'In Development': 'bg-gold',
+    'Private Beta': 'bg-cyan',
+    Prototype: 'bg-pink',
+    'Coming Soon': 'bg-muted',
+};
+
+function fileName(title) {
+    return title.split(' – ')[0].toUpperCase().replace(/\s+/g, '_') + '.EXE';
+}
 
 export default function Projects() {
     return (
-        <section className="bg-[#0a0c18] text-white py-20 px-4 md:px-8">
-            <div className="max-w-7xl mx-auto">
-                <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center">Featured Projects</h2>
-                <p className="text-center text-gray-400 mb-12">
-                    Platforms we’re building to modernize African governments, empower small businesses, and unlock scale for the next generation of innovation.
-                </p>
+        <section id="projects" className="relative bg-ink-2 px-4 py-28 text-cream md:px-8">
+            <div className="mx-auto max-w-7xl">
+                <SectionHeading
+                    index="04"
+                    label="Projects.dir"
+                    title="Featured projects"
+                    subtitle="Platforms we’re building to modernize African governments, empower small businesses, and unlock scale for the next generation of innovation."
+                />
 
-                <div className="grid md:grid-cols-3 gap-10">
-                    {projects.map((proj, i) => (
-                        <div
-                            key={i}
-                            className="bg-[#11131f] border border-white/10 rounded-xl overflow-hidden hover:shadow-lg transition"
-                        >
-                            <div className="relative w-full h-48">
-                                <Image
-                                    src={proj.image}
-                                    alt={proj.title}
-                                    fill
-                                    className="object-cover"
-                                />
-                            </div>
-                            <div className="p-6">
-                                <div className="flex items-center justify-between mb-2">
-                                    <h3 className="text-xl font-semibold">{proj.title}</h3>
-                                    {proj.status && (
-                                        <span
-                                            className={`text-xs px-2 py-1 rounded-full font-medium
-                    ${proj.status === 'Live'
-                                                    ? 'bg-[#16a34a] text-white'
-                                                    : proj.status === 'In Development'
-                                                        ? 'bg-[#ca8a04] text-white'
-                                                        : proj.status === 'Private Beta'
-                                                            ? 'bg-[#2563eb] text-white'
-                                                            : proj.status === 'Prototype'
-                                                                ? 'bg-[#4b5563] text-white'
-                                                                : 'bg-[#374151] text-white'
-                                                }
-                  `}
-                                        >
+                <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
+                    {projects.map((proj, i) => {
+                        const Icon = proj.icon;
+                        return (
+                            <motion.article
+                                key={proj.title}
+                                initial={{ opacity: 0, y: 50 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true, amount: 0.2 }}
+                                transition={{ delay: (i % 3) * 0.12, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                                className={i === 0 ? 'sm:col-span-2' : ''}
+                            >
+                                <RetroWindow title={fileName(proj.title)} hoverable className="group flex h-full flex-col" bodyClassName="flex flex-1 flex-col">
+                                    <div className={`screen-lines relative ${i === 0 ? 'h-56 lg:h-64' : 'h-48'} overflow-hidden border-b-2 border-cream bg-gradient-to-br ${proj.hue}`}>
+                                        {proj.image ? (
+                                            <Image
+                                                src={proj.image}
+                                                alt={proj.title}
+                                                fill
+                                                sizes="(min-width: 1024px) 800px, 100vw"
+                                                className="object-cover transition-transform duration-700 group-hover:scale-110"
+                                            />
+                                        ) : (
+                                            <div className="absolute inset-0 flex items-center justify-center">
+                                                <div className="absolute h-40 w-40 rounded-full bg-white/5 blur-2xl transition-transform duration-700 group-hover:scale-150" />
+                                                <Icon
+                                                    className="relative h-20 w-20 text-cream/90 drop-shadow-[4px_4px_0_rgba(0,0,0,0.5)] transition-transform duration-500 group-hover:-translate-y-2 group-hover:rotate-6"
+                                                    strokeWidth={1.5}
+                                                />
+                                            </div>
+                                        )}
+                                        <span className="absolute left-3 top-3 z-10 flex items-center gap-2 border-2 border-cream bg-black/80 px-2 py-1 font-pixel text-[8px] uppercase text-cream">
+                                            <span className={`h-2 w-2 ${STATUS[proj.status] ?? 'bg-muted'} ${proj.status === 'Live' ? 'animate-blink' : ''}`} />
                                             {proj.status}
                                         </span>
-                                    )}
-                                </div>
-                                <p className="text-gray-400 text-sm mb-4">{proj.desc}</p>
-                                <Link
-                                    href={proj.link}
-                                    className="text-yellow-400 font-medium hover:underline"
-                                >
-                                    View Project →
-                                </Link>
-                            </div>
-                        </div>
-                    ))}
+                                    </div>
+
+                                    <div className="flex flex-1 flex-col p-6">
+                                        <h3 className="mb-3 font-display text-3xl leading-none">{proj.title}</h3>
+                                        <p className="mb-6 flex-1 text-sm leading-relaxed text-muted">{proj.desc}</p>
+                                        <a
+                                            href={proj.link ?? `mailto:getskulapp@gmail.com?subject=${encodeURIComponent(`About ${proj.title}`)}`}
+                                            {...(proj.link ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+                                            className="self-start font-pixel text-[10px] uppercase text-gold transition hover:text-pink"
+                                        >
+                                            {proj.link ? 'Visit site' : 'Ask about it'} <span className="inline-block transition-transform group-hover:translate-x-1">→</span>
+                                        </a>
+                                    </div>
+                                </RetroWindow>
+                            </motion.article>
+                        );
+                    })}
                 </div>
             </div>
         </section>
-
     );
 }
